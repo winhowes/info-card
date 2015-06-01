@@ -1,0 +1,125 @@
+<!--
+@license
+Copyright (c) 2015 Winston Howes. All rights reserved.
+This code may only be used under the MIT license found at https://github.com/winhowes/parallax-container/blob/master/LICENSE
+-->
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+A card that displays a picture with some info in a pretty format.
+
+Example:
+
+    <info-card image="./myPic.png" offset-y="top">
+      <h1>Title</h1>
+      <p>Some info. You can enter your description here.</p>
+    </info-card>
+
+@demo
+-->
+
+<link rel="import" href="../paper-material/paper-material.html">
+
+<dom-module id="info-card">
+
+  <style>
+    paper-material {
+      width: 400px;
+      height: 130px;
+      padding: 10px;
+    }
+    
+    paper-material ::content {
+      margin: 0px;
+    }
+    
+    paper-material ::content > h1 {
+      text-transform: capitalize;
+      margin-top: 0px;
+      margin-bottom: 10px;
+      height: 30px;
+      font-size: 30px;
+    }
+
+    paper-material #image {
+      float: left;
+      width: 100px;
+      height: 100px;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-radius: 100px;
+      margin: 10px 15px 10px 10px;
+      border: 5px solid #000;
+      box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, .3);
+    }
+
+    paper-material ::content > p {
+      overflow-y: auto;
+      word-break: break-strict;
+      height: 90px;
+      margin: 0px;
+      display: table-cell;
+      vertical-align: middle;
+    }
+  </style>
+
+  <template>
+    <paper-material>
+      <div id="image"></div>
+      <content></content>
+    </paper-material>
+  </template>
+
+</dom-module>
+
+<script>
+
+  Polymer({
+    is: 'info-card',
+    
+    properties: {
+      /**
+       * `image` defines an image which will be displayed in a 100px by 100px circle.
+      */
+      image: {
+        type: String,
+        notify: true,
+        value: ""
+      },
+      /**
+       * `offsetX` defines the x-axis background position.
+      */
+      offsetX: {
+        type: String,
+        notify: true,
+        value: "center"
+      },
+      /**
+       * `offsetY` defines the y-axis background position.
+      */
+      offsetY: {
+        type: String,
+        notify: true,
+        value: "center"
+      }
+    },
+    listeners: {
+      "image-changed": "_updateImageCSS",
+      "offsetX-changed": "_updateImageCSS",
+      "offsetY-changed": "_updateImageCSS"
+    },
+    ready: function() {
+      this._updateImageCSS();
+    },
+    /**
+     * `_updateImageCSS` is called when the background image needs to be updated.
+    */
+    _updateImageCSS: function() {
+      var imageStyle = document.getElementById("image").style;
+      imageStyle.backgroundImage = "url(" + this.image + ")";
+      imageStyle.backgroundPosition = this.offsetX + " " + this.offsetY;
+      
+    }
+  });
+
+</script>
