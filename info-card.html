@@ -101,12 +101,21 @@ Example:
         type: String,
         notify: true,
         value: "center"
+      },
+      /**
+       * `border` defines border thickness around the `image`.
+      */
+      border: {
+        type: Number,
+        notify: true,
+        value: 5
       }
     },
     listeners: {
       "image-changed": "_updateImageCSS",
       "offsetX-changed": "_updateImageCSS",
-      "offsetY-changed": "_updateImageCSS"
+      "offsetY-changed": "_updateImageCSS",
+      "border-changed": "_updateImageCSS"
     },
     ready: function() {
       this._updateImageCSS();
@@ -118,7 +127,7 @@ Example:
       var imageStyle = document.getElementById("image").style;
       imageStyle.backgroundImage = "url(" + this.image + ")";
       imageStyle.backgroundPosition = this.offsetX + " " + this.offsetY;
-      
+      imageStyle.borderWidth = this.border;
     }
   });
 
