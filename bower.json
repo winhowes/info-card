@@ -2,7 +2,7 @@
   "name": "info-card",
   "version": "0.0.7",
   "authors": [
-    "Anonymous <winstonhowes@gmail.com>"
+    "Winston Howes <winstonhowes@gmail.com>"
   ],
   "description": "A card that displays a picture with some info in a pretty format.",
   "keywords": [
