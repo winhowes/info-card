@@ -18,7 +18,7 @@ This code may only be used under the MIT license found at https://github.com/win
   <body>
 
     <!-- You can use the document as a place to set up your fixtures. -->
-    <info-card image="myPic.png" offset-y="top"></info-card>
+    <info-card image="myPic.png" offset-y="top" width="60"></info-card>
 
     <script>
       var myEl = document.querySelector('info-card');
@@ -39,6 +39,10 @@ This code may only be used under the MIT license found at https://github.com/win
         
         test('defines the "border" property', function() {
           assert.equal(myEl.border, 5);
+        });
+        
+        test('defines the "width" property', function() {
+          assert.equal(myEl.width, 60);
         });
 
       });

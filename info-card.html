@@ -130,6 +130,15 @@ Example:
         notify: true,
         value: 5,
         observer: "_updateImageCSS"
+      },
+      /**
+       * `width` defines border thickness around the `image`.
+      */
+      width: {
+        type: Number,
+        notify: true,
+        value: 100,
+        observer: "_updateImageCSS"
       }
     },
     ready: function() {
@@ -157,7 +166,8 @@ Example:
       imageStyle.backgroundImage = "url(" + this.image + ")";
       imageStyle.backgroundPosition = this.offsetX + " " + this.offsetY;
       imageStyle.borderWidth = this.border + "px";
-      imageStyle.margin = -(50 + this.border) + "px";
+      imageStyle.width = imageStyle.height = this.width + "px";
+      imageStyle.margin = -(this.width/2 + this.border) + "px";
     }
   });
 
