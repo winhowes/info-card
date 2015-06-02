@@ -28,6 +28,7 @@ Example:
       height: 130px;
       padding: 10px;
       display: inline-block;
+      overflow: hidden;
     }
     
     paper-material ::content {
@@ -77,7 +78,6 @@ Example:
 
   Polymer({
     is: 'info-card',
-    
     properties: {
       /**
        * `image` defines an image which will be displayed in a 100px by 100px circle.
@@ -85,7 +85,8 @@ Example:
       image: {
         type: String,
         notify: true,
-        value: ""
+        value: "",
+        observer: "_updateImageCSS"
       },
       /**
        * `offsetX` defines the x-axis background position.
@@ -93,7 +94,8 @@ Example:
       offsetX: {
         type: String,
         notify: true,
-        value: "center"
+        value: "center",
+        observer: "_updateImageCSS"
       },
       /**
        * `offsetY` defines the y-axis background position.
@@ -101,7 +103,8 @@ Example:
       offsetY: {
         type: String,
         notify: true,
-        value: "center"
+        value: "center",
+        observer: "_updateImageCSS"
       },
       /**
        * `border` defines border thickness around the `image`.
@@ -109,14 +112,9 @@ Example:
       border: {
         type: Number,
         notify: true,
-        value: 5
+        value: 5,
+        observer: "_updateImageCSS"
       }
-    },
-    listeners: {
-      "image-changed": "_updateImageCSS",
-      "offsetX-changed": "_updateImageCSS",
-      "offsetY-changed": "_updateImageCSS",
-      "border-changed": "_updateImageCSS"
     },
     ready: function() {
       this._updateImageCSS();
@@ -128,7 +126,7 @@ Example:
       var imageStyle = document.getElementById("image").style;
       imageStyle.backgroundImage = "url(" + this.image + ")";
       imageStyle.backgroundPosition = this.offsetX + " " + this.offsetY;
-      imageStyle.borderWidth = this.border;
+      imageStyle.borderWidth = this.border + "px";
     }
   });
 
