@@ -123,7 +123,7 @@ Example:
      * `_updateImageCSS` is called when the background image needs to be updated.
     */
     _updateImageCSS: function() {
-      var imageStyle = document.getElementById("image").style;
+      var imageStyle = this.$.image.style;
       imageStyle.backgroundImage = "url(" + this.image + ")";
       imageStyle.backgroundPosition = this.offsetX + " " + this.offsetY;
       imageStyle.borderWidth = this.border + "px";
