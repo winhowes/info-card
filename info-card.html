@@ -25,14 +25,24 @@ Example:
   <style>
     paper-material {
       width: 400px;
-      height: 130px;
       padding: 10px;
-      display: inline-block;
+      display: inline-flex;
       overflow: hidden;
+      flex-direction: row;
     }
     
     paper-material ::content {
-      margin: 0px;
+      margin: auto;
+    }
+    
+    #left-div{
+      flex: 1 50%;
+      position: relative;
+      
+    }
+    
+    #right-div{
+      flex: 1 100%;
     }
     
     paper-material ::content > h1 {
@@ -44,14 +54,16 @@ Example:
     }
 
     paper-material #image {
-      float: left;
       width: 100px;
       height: 100px;
       background-position: center;
       background-repeat: no-repeat;
       border-radius: 100px;
-      margin: 10px 15px 10px 10px;
       border: 5px solid #000;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -55px;
       box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, .3);
     }
 
@@ -66,9 +78,13 @@ Example:
   </style>
 
   <template>
-    <paper-material>
-      <div id="image"></div>
-      <content></content>
+    <paper-material id="paperMaterial" on-mouseover="handleMouseOver" on-mouseout="handleMouseOut">
+      <div id="left-div">
+        <div id="image"></div>
+      </div>
+      <div id="right-div">
+        <content></content>
+      </div>
     </paper-material>
   </template>
 
@@ -120,6 +136,20 @@ Example:
       this._updateImageCSS();
     },
     /**
+     * `handleMouseOver` is called when the element is moused over.
+     * It increases the shadow of the element.
+    */
+    handleMouseOver: function(e) {
+      this.$.paperMaterial.elevation += 2;
+    },
+    /**
+     * `handleMouseOut` is called when the element is no longer hovered over.
+     * It decreases the shadow of the element.
+    */
+    handleMouseOut: function(e) {
+      this.$.paperMaterial.elevation -= 2;
+    },
+    /**
      * `_updateImageCSS` is called when the background image needs to be updated.
     */
     _updateImageCSS: function() {
@@ -127,6 +157,7 @@ Example:
       imageStyle.backgroundImage = "url(" + this.image + ")";
       imageStyle.backgroundPosition = this.offsetX + " " + this.offsetY;
       imageStyle.borderWidth = this.border + "px";
+      imageStyle.margin = -(50 + this.border) + "px";
     }
   });
 
