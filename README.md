@@ -7,5 +7,5 @@ Check out the demo and docs here: https://winhowes.github.io/info-card/component
 # Installation
 To install simply run:
 ```
-bower install --save parallax-container
+bower install --save info-card
 ```
