@@ -1,0 +1,174 @@
+<!--
+@license
+Copyright (c) 2015 Winston Howes. All rights reserved.
+This code may only be used under the MIT license found at https://github.com/winhowes/parallax-container/blob/master/LICENSE
+-->
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+A card that displays a picture with some info in a pretty format.
+
+Example:
+
+    <info-card image="./myPic.png" offset-y="top">
+      <h1>Title</h1>
+      <p>Some info. You can enter your description here.</p>
+    </info-card>
+
+@demo
+-->
+
+<link rel="import" href="../paper-material/paper-material.html">
+
+<dom-module id="info-card">
+
+  <style>
+    paper-material {
+      width: 400px;
+      padding: 10px;
+      display: inline-flex;
+      overflow: hidden;
+      flex-direction: row;
+    }
+
+    paper-material ::content {
+      margin: auto;
+    }
+
+    #left-div{
+      flex: 1 50%;
+      position: relative;
+
+    }
+
+    #right-div{
+      flex: 1 100%;
+    }
+
+    paper-material ::content > h1 {
+      text-transform: capitalize;
+      margin-top: 0px;
+      margin-bottom: 10px;
+      height: 30px;
+      font-size: 30px;
+    }
+
+    paper-material #image {
+      width: 100px;
+      height: 100px;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-radius: 100px;
+      border: 5px solid #000;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -55px;
+      box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, .3);
+    }
+
+    paper-material ::content > p {
+      overflow-y: auto;
+      word-break: break-strict;
+      height: 90px;
+      margin: 0px;
+      display: table-cell;
+      vertical-align: middle;
+    }
+  </style>
+
+  <template>
+    <paper-material id="paperMaterial" on-mouseover="handleMouseOver" on-mouseout="handleMouseOut">
+      <div id="left-div">
+        <div id="image"></div>
+      </div>
+      <div id="right-div">
+        <content></content>
+      </div>
+    </paper-material>
+  </template>
+
+</dom-module>
+
+<script>
+
+  Polymer({
+    is: 'info-card',
+    properties: {
+      /**
+       * `image` defines an image which will be displayed in a 100px by 100px circle.
+      */
+      image: {
+        type: String,
+        notify: true,
+        value: '',
+        observer: '_updateImageCSS'
+      },
+      /**
+       * `offsetX` defines the x-axis background position.
+      */
+      offsetX: {
+        type: String,
+        notify: true,
+        value: 'center',
+        observer: '_updateImageCSS'
+      },
+      /**
+       * `offsetY` defines the y-axis background position.
+      */
+      offsetY: {
+        type: String,
+        notify: true,
+        value: 'center',
+        observer: '_updateImageCSS'
+      },
+      /**
+       * `border` defines border thickness around the `image`.
+      */
+      border: {
+        type: Number,
+        notify: true,
+        value: 5,
+        observer: '_updateImageCSS'
+      },
+      /**
+       * `width` defines border thickness around the `image`.
+      */
+      width: {
+        type: Number,
+        notify: true,
+        value: 100,
+        observer: '_updateImageCSS'
+      }
+    },
+    ready: function() {
+      this._updateImageCSS();
+    },
+    /**
+     * `handleMouseOver` is called when the element is moused over.
+     * It increases the shadow of the element.
+    */
+    handleMouseOver: function() {
+      this.$.paperMaterial.elevation += 2;
+    },
+    /**
+     * `handleMouseOut` is called when the element is no longer hovered over.
+     * It decreases the shadow of the element.
+    */
+    handleMouseOut: function() {
+      this.$.paperMaterial.elevation -= 2;
+    },
+    /**
+     * `_updateImageCSS` is called when the background image needs to be updated.
+    */
+    _updateImageCSS: function() {
+      var imageStyle = this.$.image.style;
+      imageStyle.backgroundImage = 'url(' + this.image + ')';
+      imageStyle.backgroundPosition = this.offsetX + ' ' + this.offsetY;
+      imageStyle.borderWidth = this.border + 'px';
+      imageStyle.width = imageStyle.height = this.width + 'px';
+      imageStyle.margin = -(this.width/2 + this.border) + 'px';
+    }
+  });
+
+</script>
