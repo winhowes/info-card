@@ -30,21 +30,21 @@ Example:
       overflow: hidden;
       flex-direction: row;
     }
-    
+
     paper-material ::content {
       margin: auto;
     }
-    
+
     #left-div{
       flex: 1 50%;
       position: relative;
-      
+
     }
-    
+
     #right-div{
       flex: 1 100%;
     }
-    
+
     paper-material ::content > h1 {
       text-transform: capitalize;
       margin-top: 0px;
@@ -101,8 +101,8 @@ Example:
       image: {
         type: String,
         notify: true,
-        value: "",
-        observer: "_updateImageCSS"
+        value: '',
+        observer: '_updateImageCSS'
       },
       /**
        * `offsetX` defines the x-axis background position.
@@ -110,8 +110,8 @@ Example:
       offsetX: {
         type: String,
         notify: true,
-        value: "center",
-        observer: "_updateImageCSS"
+        value: 'center',
+        observer: '_updateImageCSS'
       },
       /**
        * `offsetY` defines the y-axis background position.
@@ -119,8 +119,8 @@ Example:
       offsetY: {
         type: String,
         notify: true,
-        value: "center",
-        observer: "_updateImageCSS"
+        value: 'center',
+        observer: '_updateImageCSS'
       },
       /**
        * `border` defines border thickness around the `image`.
@@ -129,7 +129,7 @@ Example:
         type: Number,
         notify: true,
         value: 5,
-        observer: "_updateImageCSS"
+        observer: '_updateImageCSS'
       },
       /**
        * `width` defines border thickness around the `image`.
@@ -138,7 +138,7 @@ Example:
         type: Number,
         notify: true,
         value: 100,
-        observer: "_updateImageCSS"
+        observer: '_updateImageCSS'
       }
     },
     ready: function() {
@@ -148,14 +148,14 @@ Example:
      * `handleMouseOver` is called when the element is moused over.
      * It increases the shadow of the element.
     */
-    handleMouseOver: function(e) {
+    handleMouseOver: function() {
       this.$.paperMaterial.elevation += 2;
     },
     /**
      * `handleMouseOut` is called when the element is no longer hovered over.
      * It decreases the shadow of the element.
     */
-    handleMouseOut: function(e) {
+    handleMouseOut: function() {
       this.$.paperMaterial.elevation -= 2;
     },
     /**
@@ -163,11 +163,11 @@ Example:
     */
     _updateImageCSS: function() {
       var imageStyle = this.$.image.style;
-      imageStyle.backgroundImage = "url(" + this.image + ")";
-      imageStyle.backgroundPosition = this.offsetX + " " + this.offsetY;
-      imageStyle.borderWidth = this.border + "px";
-      imageStyle.width = imageStyle.height = this.width + "px";
-      imageStyle.margin = -(this.width/2 + this.border) + "px";
+      imageStyle.backgroundImage = 'url(' + this.image + ')';
+      imageStyle.backgroundPosition = this.offsetX + ' ' + this.offsetY;
+      imageStyle.borderWidth = this.border + 'px';
+      imageStyle.width = imageStyle.height = this.width + 'px';
+      imageStyle.margin = -(this.width/2 + this.border) + 'px';
     }
   });
 
